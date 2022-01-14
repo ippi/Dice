@@ -45,7 +45,7 @@ endif()
 
 include(CheckCSourceCompiles)
 
-list(APPEND CMAKE_REQUIRED_LIBRARIES "-Wl,-Bsymbolic-functions -Wl,-Bsymbolic")
+list(APPEND CMAKE_REQUIRED_LIBRARIES "-Wl,-E,-Bsymbolic-functions -Wl,-Bsymbolic")
 	
 check_c_source_compiles(
 [=[
@@ -56,10 +56,10 @@ int main ()
 ]=]
 BSYMBOLIC_WORKS
 )
-list(REMOVE_ITEM CMAKE_REQUIRED_LIBRARIES "-Wl,-Bsymbolic-functions -Wl,-Bsymbolic")
+list(REMOVE_ITEM CMAKE_REQUIRED_LIBRARIES "-Wl,-E,-Bsymbolic-functions -Wl,-Bsymbolic")
 
 if (BSYMBOLIC_WORKS)
-    set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,-Bsymbolic-functions -Wl,-Bsymbolic")
+    set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,-E,-Bsymbolic-functions -Wl,-Bsymbolic")
 endif()
 
 include(CheckIPOSupported)
@@ -102,5 +102,5 @@ if(CMAKE_SYSTEM_NAME STREQUAL Android)
 endif()
 
 if(NOT ((CMAKE_CXX_COMPILER_ID STREQUAL "MSVC") OR (CMAKE_CXX_COMPILER_ID STREQUAL "AppleClang")))
-    set_target_properties(w4123.Dice PROPERTIES LINK_FLAGS_RELEASE "-s -Wl,--exclude-libs,ALL")
+    set_target_properties(w4123.Dice PROPERTIES LINK_FLAGS_RELEASE "-s -Wl,-E,--exclude-libs,ALL")
 endif()
