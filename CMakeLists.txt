@@ -4,6 +4,7 @@ set(CMAKE_TOOLCHAIN_FILE ${CMAKE_CURRENT_SOURCE_DIR}/vcpkg/scripts/buildsystems/
   CACHE STRING "Vcpkg toolchain file")
 set(CMAKE_OSX_DEPLOYMENT_TARGET "10.15" 
   CACHE STRING "Minimum OS X deployment version")
+set(CMAKE_CXX_FLAGS "-O2 -DLUA_USE_POSIX -DLUA_USE_DLOPEN")
 project(Dice)
 
 include_directories(CQSDK Dice Lua QQAPI)
